@@ -1,5 +1,5 @@
 # **Unmasking The Creator**
-This repository deals with classification of AI-generated and Human-crafted texts and images.
+### **This repository deals with classification of AI-generated and Human-crafted texts.**
 
 ---
 ## **Demo video for text classification**
@@ -25,6 +25,8 @@ https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/7521255
 ---
 
 ## **Methodology**
+The classification of text as AI-generated or human-crafted is based on 3 different methods:
+
 * ### **Direct Text Classification using RoBERTa**
 This method uses RoBERTa model which can directly classify whether the given text is written by an AI or a human. The model is fine-tuned with our above mentioned datasets.
 
