@@ -26,7 +26,7 @@ body {
   margin: 0;
 }
 
-.App-text-check-section {
+.App-check-section {
   padding: 2rem 6.5rem 2.5rem;
   display: flex;
   column-gap: 2rem;
@@ -34,14 +34,24 @@ body {
   justify-content: center;
 }
 
-.App-text-input-div {
+.App-input-div {
   flex-basis: 60%;
   flex-grow: 0;
   flex-shrink: 0;
 }
 
-.App-text-editor-div {
+.App-editor-div {
   border: 1px solid var(--color-secondary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-report);
+}
+
+.App-editor-div img {
+  height: 50vh;
+  vertical-align: middle;
 }
 
 .App-output-div {
@@ -50,7 +60,7 @@ body {
   flex-shrink: 0;
 }
 
-.App-text-input-title {
+.App-input-title {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
@@ -66,7 +76,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.App-text-input-textarea {
+.App-input-textarea {
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -76,7 +86,7 @@ body {
   border-width: 0;
 }
 
-.App-text-input-div textarea {
+.App-input-div textarea {
   background: var(--color-report);
   border-radius: 0.4375rem;
   border-width: 0px;
@@ -98,7 +108,15 @@ body {
   border: 1px solid var(--color-secondary);
 }
 
-.App-text-input-check-button {
+.App-content-type-select {
+  margin: 2rem auto 0;
+  /* margin-top: 1.5rem; */
+  width: 50%;
+  text-align: center;
+  border: 1px solid var(--color-secondary);
+}
+
+.App-input-check-button {
   margin-top: 1.5rem;
   background: var(--color-action);
   border-radius: 5px;
@@ -138,12 +156,12 @@ body {
     text-align: center;
   }
 
-  .App-text-input-title {
+  .App-input-title {
     font-size: 1rem;
     margin-bottom: 1rem;
   }
 
-  .App-text-input-check-button {
+  .App-input-check-button {
     font-size: 1rem;
     margin-top: 1rem;
   }
@@ -161,14 +179,14 @@ body {
     padding: 1rem 1rem;
   }
 
-  .App-text-check-section {
+  .App-check-section {
     flex-flow: column;
     padding: 1.5rem 3rem 4rem;
   }
 }
 
 @media (max-width:600px)  {
-  .App-text-check-section {
+  .App-check-section {
     padding: 1rem 1.25rem 4rem;
   }
 }
