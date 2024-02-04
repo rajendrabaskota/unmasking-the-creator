@@ -1,11 +1,17 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 import numpy as np
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, GPT2LMHeadModel, GPT2TokenizerFast
-from datasets import Dataset
+from transformers import CLIPProcessor, CLIPModel
+from datasets import Dataset, load_dataset
+from PIL import Image
+import pickle
+import os
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 app = FastAPI()
@@ -13,6 +19,18 @@ app = FastAPI()
 origins = [
     "*"
 ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = origins,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
+)
+
+class FormText(BaseModel):
+    text: str
+    method: str
 
 
 # Direct Classification Method
@@ -40,6 +58,22 @@ id2label = model_roberta.config.id2label
 label2id = model_roberta.config.label2id
 
 
+# Image Detection
+# clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14").to(device)
+clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14")
+clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
+
+# Loading our trained model
+filename = "models/image/image-detection-progan-only-svm.pkl"
+with open(filename, 'rb') as file:
+    svm_model = pickle.load(file)
+
+label = {
+    0: "Real",
+    1: "AI-generated"
+}
+
+
 mean_perplexity_thresholds = {
                              'wiki-intro': 17.037818272053986,
                              'hc3-reddit_eli5': 37.542010707390865,
@@ -60,7 +94,7 @@ def compute_perplexity_score(text):
     # list for storing negative log likelihood of each window
     nlls = []
     prev_end_loc = 0
-    
+
     for begin_loc in range(0, seq_len, stride):
         end_loc = min(begin_loc + max_length, seq_len)
         trg_len = end_loc - prev_end_loc  # may be different from stride on last loop
@@ -98,25 +132,12 @@ def direct_classification(text):
     return prediction[0]
 
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins = origins,
-    allow_credentials = True,
-    allow_methods = ["*"],
-    allow_headers = ["*"],
-)
-
-class Form(BaseModel):
-    text: str
-    method: str
-
-
 @app.get('/')
 def home():
     return "Wassupp!!"
 
-@app.post('/analyze')
-def submit(item: Form):
+@app.post('/analyze-text')
+def submit_text(item: FormText):
     text = item.text
     method = item.method
     result = ""
@@ -160,3 +181,28 @@ def submit(item: Form):
              'method': method
              }
     }
+
+
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+
+@app.post('/analyze-image')
+async def submit_image(file: UploadFile = File(...)):
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
+    with open(file_path, "wb") as f:
+        f.write(file.file.read())
+
+    image = Image.open(file_path).resize((256, 256))
+    inputs = clip_processor(text='nothing', images=image, return_tensors="pt", padding=True)
+    features = clip_model(**inputs)
+    features = features['image_embeds'].tolist()
+
+    y_pred = svm_model.predict(np.array(features))[0].item()
+    y_pred = label[y_pred]
+
+    return {'result': {
+             'creator': y_pred,
+             'method': 'image'
+             }
+        }
