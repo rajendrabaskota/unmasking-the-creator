@@ -1,6 +1,15 @@
 # **Unmasking The Creator**
 ### This repository deals with classification of AI-generated and Human-crafted texts and images.
 
+## **You can run the project locally by following these steps:
+   * Clone the repository to your local machine
+   * Activate a virtual environment and run the command `pip install -r requirements.txt`
+   * cd into backend directory
+   * Run the command `uvicorn main:app --host 0.0.0.0 --port 8000` to start the backend server
+   * Return back to the root directory of the project and cd into the frontend directory
+   * Run the command `npm install` to install all the required dependencies for the frontend server
+   * Run the command `npm start` to start the frontend server
+
 ---
 ## **Demo video for text and image classification**
 https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/4670647f-c0d8-4a79-830a-314171f4eaf9
