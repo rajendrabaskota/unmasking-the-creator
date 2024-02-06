@@ -1,9 +1,9 @@
 # **Unmasking The Creator**
-### **This repository deals with classification of AI-generated and Human-crafted texts.**
+### **This repository deals with classification of AI-generated and Human-crafted texts and images.**
 
 ---
-## **Demo video for text classification**
-https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/75212559-6a60-4a5f-b71f-05c37cedbb89
+## **Demo video for text and image classification**
+https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/4670647f-c0d8-4a79-830a-314171f4eaf9
 
 ---
 ## **Datasets Insights**
