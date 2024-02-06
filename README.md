@@ -45,9 +45,11 @@ This method uses GPT-2 model to calculate perplexity of the given text. The calc
 
 * #### **Domain-wise Perplexity Score Method**
 The primary concept of this method is the same as the above method except that this method uses different thresholds for different texts based on the domain of the text. Thus, this method first classifies the given text into its respective domain using a fine-tuned RoBERTa model. The domains are based on the above mentioned datasets and the datasets are divided into 6 different domains: HC3 Reddit Eli5, HC3 Open QA, HC3 Medicine, HC3 Finance, HC3 Wiki CSAI and GPT-Wiki-Intro. After identifying the domain of the text, the perplexity of the given text is compared with the mean perplexity threshold of the respective domain. Finally, the text is classified as AI-generated or Human-crafted.
+---
 
 ### **Results**
 * Average F1 score based on perplexity score method: **90.67%**
+---
 
 
 ## **2) AI Generated Image Detection**
@@ -60,6 +62,7 @@ The primary concept of this method is the same as the above method except that t
     * Testing is done on 20 different generative models
     * 12 different GAN models (~87,000 images) taken from [this](https://arxiv.org/abs/1912.11035) work
     * 8 different diffusion models (10,000 images) taken from [this](https://github.com/Yuheng-Li/UniversalFakeDetect) work
+---
  
 ### **Methodology**
 * Feature space is generated using CLIP:ViT-L/14
@@ -69,6 +72,7 @@ The primary concept of this method is the same as the above method except that t
 ![image1](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/9cbe46db-03e0-4ca9-a54d-ef00338e3b68)
 
                               Block Diagram for AI Image Detection
+---
 
 ### **Results**
 #### The following results were obtained when trained using a Neural Network with input layer of 768 units and an output layer comprising of a single unit. The inputs to the network are the embeddings obtained from CLIP:ViT-L/14
@@ -77,6 +81,7 @@ The primary concept of this method is the same as the above method except that t
    * Epochs: 20k
    * 
      ![progan-adm](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/67193485-d03d-4629-9d35-8da62b89f163)
+---
 
 * Trained using only ProGAN dataset
    * Learning Rate: 0.03
@@ -86,6 +91,7 @@ The primary concept of this method is the same as the above method except that t
    * Epochs: 2500
    * 
      ![gan-only](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/5f365844-5444-41b0-b807-ba21c10c3f9c)
+---
 
 * Trained using only ADM dataset
    * Learning Rate: 0.03
@@ -93,7 +99,4 @@ The primary concept of this method is the same as the above method except that t
    *
      ![adm-only](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/278733e3-abc7-4c2e-98b5-92d0010d98fc)
 
-
-
-
-
+---
