@@ -57,7 +57,7 @@ The primary concept of this method is the same as the above method except that t
 * The generated feature space is fed to several models like Logistic Regression, SVM, Neural Networks
 * **Further plan**: Implementation of Teacher-Student modality
 
-![image1](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/136f95c7-40fe-41ce-b952-582881282527)
+![image1](https://github.com/rajendrabaskota/unmasking-the-creator/assets/66084649/9cbe46db-03e0-4ca9-a54d-ef00338e3b68)
 
                               Block Diagram for AI Image Detection
 
