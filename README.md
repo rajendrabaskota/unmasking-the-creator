@@ -62,7 +62,7 @@ The primary concept of this method is the same as the above method except that t
                               Block Diagram for AI Image Detection
 
 ### **Results**
-#### The following results were obtained when trained using a Neural Network with input units of 768 and output unit of 1. The inputs to the network are the embeddings obtained from CLIP:ViT-L/14
+#### The following results were obtained when trained using a Neural Network with input layer of 768 units and an output layer comprising of a single unit. The inputs to the network are the embeddings obtained from CLIP:ViT-L/14
 * Trained using both ProGAN and ADM datasets
    * Learning Rate: 0.3
    * Epochs: 20k
