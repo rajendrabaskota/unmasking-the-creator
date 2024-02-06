@@ -1,7 +1,7 @@
 # **Unmasking The Creator**
 ### This repository deals with classification of AI-generated and Human-crafted texts and images.
 
-## **You can run the project locally by following these steps:
+## **You can run the project locally by following these steps:**
    * Clone the repository to your local machine
    * Activate a virtual environment and run the command `pip install -r requirements.txt`
    * cd into backend directory
