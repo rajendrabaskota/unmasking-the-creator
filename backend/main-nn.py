@@ -86,7 +86,7 @@ class NN(nn.Module):
 
 
 img_model = NN(input_units, output_units)
-checkpoint = torch.load("models/nn-model-progan-adm-20k.pt")
+checkpoint = torch.load("models/image/nn-model-progan-adm-20k.pt", map_location=torch.device('cpu'))
 img_model.load_state_dict(checkpoint['state_dict'])
 img_model.eval()
 
@@ -237,9 +237,13 @@ async def submit_image(file: UploadFile = File(...)):
         probs, _ = img_model(features)
         probs = probs.cpu().detach().numpy()
         y_pred = (probs > threshold).item()
+        pred_label = label[y_pred]
+        probability = y_pred*probs + (1-y_pred)*(1-probs)
+        # print(probability[0][0]*100)
 
     return {'result': {
-             'creator': label[y_pred],
-             'method': 'image'
+             'creator': pred_label,
+             'method': 'image',
+             'probability': str(probability[0][0])
              }
         }
