@@ -270,6 +270,9 @@ function App() {
                   {/* 0 <= output.probability <= 1 */}
                   This image is {output.creator}
                 </p>
+                <p className="App-output-text">
+                  Probability: {output.probability}
+                </p>
 
               </p>
               }
